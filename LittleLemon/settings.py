@@ -155,3 +155,4 @@ REST_FRAMEWORK = {
 DJOSER = {
     "USER_ID_FIELD": "username"
 }
+SESSION_COOKIE_SECURE = True
