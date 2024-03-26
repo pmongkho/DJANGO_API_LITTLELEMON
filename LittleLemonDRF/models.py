@@ -8,6 +8,11 @@ class Category(models.Model):
     slug = models.SlugField()
     title = models.CharField(max_length=255, db_index=True)
 
+    def __str__(self):
+        model_name = self.__class__.__name__
+        fields_str = ", ".join((f"{field.name}={getattr(self, field.name)}" for field in self._meta.fields))
+        return f"{model_name}({fields_str})"
+
 class MenuItem(models.Model):
     title = models.CharField(max_length=255, db_index=True)
     price = models.DecimalField(max_digits=6, decimal_places=2, db_index=True)
@@ -42,6 +47,11 @@ class OrderItem(models.Model):
     class Meta:
         unique_together = ('order','menuitem')
         
+
+    def __str__(self):
+        model_name = self.__class__.__name__
+        fields_str = ", ".join((f"{field.name}={getattr(self, field.name)}" for field in self._meta.fields))
+        return f"{model_name}({fields_str})"
 # to manage orders
 class OrderDetail(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -49,6 +59,11 @@ class OrderDetail(models.Model):
     status = models.BooleanField(db_index=True, default=0)
     total = models.DecimalField(max_digits=6, decimal_places=2)
     date = models.DateField(db_index=True)
+
+    def __str__(self):
+        model_name = self.__class__.__name__
+        fields_str = ", ".join((f"{field.name}={getattr(self, field.name)}" for field in self._meta.fields))
+        return f"{model_name}({fields_str})"
     
 
     
